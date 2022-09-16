@@ -21,7 +21,10 @@ class Calc {
             str = input.nextLine().split(" ");
             num1 = Integer.parseInt(str[0]);
             operand = str[1];
-            num2 = Integer.parseInt(str[2]);
+            try{
+            num2 = Integer.parseInt(str[2]);} catch (Exception e) {
+                throw new CalculatorNumberFormatException("Ошибка: ");
+            }
             isRoman = false;
         } else {
             str = input.nextLine().split(" ");
@@ -31,7 +34,8 @@ class Calc {
                 num2 = romanToNumber(str[2]);
                 isRoman = true;
             }catch (Exception exception){
-                throw new CalculatorNumberFormatException("rrrrrоперанд 1 " + num1 + " оператор " + operand +  " операнд 2" + num2);
+                throw new CalculatorNumberFormatException("Error: ");
+
             }
 
         }
@@ -48,7 +52,7 @@ class Calc {
         } else if (Objects.equals(operand, "/")) {
             results = num1 / num2;
         } else {
-            throw new WrongSignException("неверный оператор ---> " + operand);
+            throw new WrongSignException(operand + " ");
         }
 
         if (isRoman) {
