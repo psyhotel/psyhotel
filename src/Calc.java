@@ -15,7 +15,6 @@ class Calc {
         int num1 = 0, num2 = 0;
         String operand = "";
         String[] str;
-        char ch = 0;
         boolean isRoman;
         if (input.hasNextInt()) {
             str = input.nextLine().split(" ");
