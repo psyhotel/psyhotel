@@ -20,21 +20,30 @@ class Calc {
             str = input.nextLine().split(" ");
             num1 = Integer.parseInt(str[0]);
             operand = str[1];
-            try{
-            num2 = Integer.parseInt(str[2]);} catch (Exception e) {
+            if (str.length > 3) {
+                throw new RuntimeException("Больше двух операндов");
+            }
+            try {
+                num2 = Integer.parseInt(str[2]);
+            } catch (Exception e) {
                 throw new CalculatorNumberFormatException("Ошибка: ");
             }
             isRoman = false;
         } else {
             str = input.nextLine().split(" ");
+
             try {
                 num1 = romanToNumber(str[0]);
                 operand = str[1];
                 num2 = romanToNumber(str[2]);
                 isRoman = true;
-            }catch (Exception exception){
+
+            } catch (Exception exception) {
                 throw new CalculatorNumberFormatException("Error: ");
 
+            }
+            if (str.length > 3) {
+                throw new RuntimeException("Больше двух операндов");
             }
 
         }
@@ -42,6 +51,7 @@ class Calc {
         if (num1 > 10 || num2 > 10) {
             throw new RuntimeException("Число больше 10");
         }
+
         if (Objects.equals(operand, "+")) {
             results = num1 + num2;
         } else if (Objects.equals(operand, "-")) {
@@ -52,6 +62,13 @@ class Calc {
             results = num1 / num2;
         } else {
             throw new WrongSignException(operand + " ");
+        }
+
+        if (results < 0) {
+            throw new RuntimeException("Число меньше 0");
+        }
+        if (isRoman && results == 0) {
+            throw new RuntimeException("В римской системе счисления не может быть 0");
         }
 
         if (isRoman) {
